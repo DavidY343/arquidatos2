@@ -1,0 +1,30 @@
+db.createCollection("usuarios_limpio", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["NIF", "NOMBRE", "EMAIL", "TELEFONO"],
+      properties: {
+        NIF: {
+          bsonType: "string",
+          pattern: "^[0-9]{3}-[0-9]{2}-[0-9]{4}$",
+          description: "Debe ser una cadena con el formato XXX-XX-XXXX y es obligatorio"
+        },
+        NOMBRE: {
+          bsonType: "string",
+          pattern: "^[a-zñ ]+$",
+          description: "Debe ser una cadena en minúsculas, sin tildes y es obligatorio"
+        },
+        EMAIL: {
+          bsonType: "string",
+          pattern: "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$",
+          description: "Debe ser una cadena con formato de email válido y es obligatorio"
+        },
+        TELEFONO: {
+          bsonType: "string",
+          pattern: "^\\d{9}$",
+          description: "Debe ser una cadena de 9 dígitos y es obligatorio"
+        }
+      }
+    }
+  }
+})

@@ -1,0 +1,47 @@
+db.createCollection("meteo24_limpio", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["FECHA", "DISTRITO", "TEMPERATURA", "PRECIPITACION", "VIENTO", "CÓDIGO", "DIRECCION", "Codigo Postal"],
+      properties: {
+        FECHA: {
+          bsonType: "string",
+          pattern: "^\\d{4}-\\d{2}-\\d{2}$",
+          description: "Debe ser una cadena en formato de fecha (YYYY-MM-DD) y es obligatorio"
+        },
+        DISTRITO: {
+          bsonType: "string",
+          pattern: "^\\d{3}$",
+          description: "Debe ser una cadena de 3 dígitos y es obligatorio"
+        },
+        TEMPERATURA: {
+          bsonType: "double",
+          description: "Debe ser un número y es obligatorio"
+        },
+        PRECIPITACION: {
+          bsonType: "double",
+          description: "Debe ser un número y es obligatorio"
+        },
+        VIENTO: {
+          bsonType: "bool",
+          description: "Debe ser un booleano y es obligatorio"
+        },
+        CÓDIGO: {
+          bsonType: "string",
+          pattern: "^\\d{8}$",
+          description: "Debe ser una cadena de 8 dígitos y es obligatorio"
+        },
+        DIRECCION: {
+          bsonType: "string",
+          pattern: "^[a-zñ ]+$",
+          description: "Debe ser una cadena en minúsculas, sin tildes y es obligatorio"
+        },
+        "Codigo Postal": {
+          bsonType: "string",
+          pattern: "^\\d{5}$",
+          description: "Debe ser una cadena de 5 dígitos y es obligatorio"
+        }
+      }
+    }
+  }
+})
